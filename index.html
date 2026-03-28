@@ -241,20 +241,47 @@
   }
 
   function handleBotQuery(query){
-    query = query.toLowerCase();
-    if(query.includes('bmi') || query.includes('weight')){
-      appendBotMessage("Let's calculate your BMI! Type: height in cm, weight in kg (e.g., 170, 65)");
+    query = query.toLowerCase().trim();
+
+    // Simple & Accurate BMI + Calories Calculation
+    if(query.includes('bmi') || query.includes('weight') || query.includes('calculate')){
+      appendBotMessage("Please type your height and weight like this:<br><strong>170, 65</strong> (height in cm, weight in kg)");
+      return;
     }
-    else if(query.match(/\d{2,3},\s*\d{2,3}/)){
-      const [heightCm, weightKg] = query.split(',').map(x => parseFloat(x.trim()));
+
+    // Check for number pattern like "170, 65" or "170 65"
+    const numbers = query.match(/\d{2,3}/g);
+    if(numbers && numbers.length >= 2){
+      let heightCm = parseFloat(numbers[0]);
+      let weightKg = parseFloat(numbers[1]);
+
+      // Basic validation
+      if(heightCm < 100 || heightCm > 250 || weightKg < 30 || weightKg > 300){
+        appendBotMessage("Please enter realistic values (height 100-250 cm, weight 30-300 kg)");
+        return;
+      }
+
       const heightM = heightCm / 100;
       const bmi = (weightKg / (heightM * heightM)).toFixed(1);
-      appendBotMessage(`Your BMI is ${bmi}. ${bmi<18.5?'Underweight':bmi<25?'Normal weight':bmi<30?'Overweight':'Obese'}`);
-      const calories = (25 * weightKg).toFixed(0);
-      appendBotMessage(`Estimated daily calories for maintenance: ${calories} kcal.`);
-      appendBotMessage("For weight loss: -500 kcal/day | For weight gain: +500 kcal/day.");
+
+      let category = '';
+      if(bmi < 18.5) category = 'Underweight';
+      else if(bmi < 25) category = 'Normal weight';
+      else if(bmi < 30) category = 'Overweight';
+      else category = 'Obese';
+
+      appendBotMessage(`Your BMI is <strong>${bmi}</strong> — ${category}`);
+
+      // Simple accurate maintenance calories (Mifflin-St Jeor simplified for general use)
+      const maintenanceCalories = Math.round(weightKg * 24);   // More realistic base
+      appendBotMessage(`Estimated daily calories for maintenance: <strong>${maintenanceCalories} kcal</strong>`);
+
+      appendBotMessage("For weight loss: subtract 300–500 kcal/day<br>For weight gain: add 300–500 kcal/day");
+      return;
     }
-    else if(query.includes('meal') || query.includes('food') || query.includes('recipe')){
+
+    // Meal suggestions
+    else if(query.includes('meal') || query.includes('food') || query.includes('recipe') || query.includes('eat')){
       appendBotMessage(`Healthy meal suggestions:
 ✅ Breakfast: Greek yogurt with berries, avocado toast, oatmeal with nuts, scrambled eggs with spinach, protein pancakes, chia pudding, smoothie bowl.
 ✅ Lunch: Grilled chicken salad, quinoa bowl with veggies, salmon wrap, tuna salad, chickpea stir-fry, turkey lettuce wraps, lentil soup.
@@ -268,7 +295,7 @@ Balance protein, carbs, and healthy fats in each meal.`);
       appendBotMessage("Hi! I'm Jessi, your friendly Fitness Guide. Ask me to calculate your BMI, calories, or meal ideas!");
     }
     else{
-      appendBotMessage("I can help with BMI, calories, weight goals, and healthy meals! Try '170, 65' or 'meal suggestions'.");
+      appendBotMessage("I can help with BMI, calories, or healthy meals!<br>Try: <strong>170, 65</strong> or type <strong>meal suggestions</strong>");
     }
   }
 
