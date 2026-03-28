@@ -60,20 +60,17 @@
 </head>
 <body>
   <div class="wrap">
-
     <header>
       <div style="width:100%;padding-bottom:12px;">
         <img src="fwj_banner.png" alt="Fitness with Jessi Banner" style="width:100%;height:auto;display:block;border-radius:16px;" />
       </div>
       <div style="font-weight:700;margin-top:8px">Get Stronger, Feel Better, Stay Motivated.</div>
-
       <nav style="margin-top:14px;display:flex;gap:12px;">
         <a href="#packages" class="small" style="text-decoration:none;color:var(--muted)">Packages</a>
         <a href="#offers" class="small" style="text-decoration:none;color:var(--muted)">Classes</a>
         <a href="#merch" class="small" style="text-decoration:none;color:var(--muted)">Merch</a>
       </nav>
     </header>
-
     <section class="hero">
       <div>
         <h1>🔥 Transform Your Body — Transform Your Life</h1>
@@ -110,7 +107,6 @@
           </div>
         </div>
       </div>
-
       <aside class="hero-card">
         <div style="display:flex;gap:12px;align-items:center">
           <div style="width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#e7ffb7);display:flex;align-items:center;justify-content:center;font-weight:800">15</div>
@@ -130,7 +126,6 @@
         <div style="margin-top:14px"><a class="btn" href="https://wa.me/447881077860?text=Hi%20I%27d%20like%20the%20Popular%20Add-ons%20pack" target="_blank" rel="noopener">⚡ Add These Power Add-ons To My Plan</a></div>
       </aside>
     </section>
-
     <section id="packages">
       <h2>Packages & Pricing — Get Results Faster</h2>
       <p class="small" style="max-width:650px">Choose the plan that matches your goals. Every package includes accountability, tracking, and personalised progression.</p>
@@ -145,7 +140,6 @@
       <p style="margin-top:20px;font-weight:700">⚡ Limited client spaces each month to maintain coaching quality.</p>
       <p>Reply <strong>“BOOK”</strong> to reserve your package.</p>
     </section>
-
     <section id="about" style="margin-top:48px">
       <h2>Meet Your Coach — Jessi</h2>
       <p class="small" style="max-width:700px;line-height:1.6;font-size:16px">
@@ -156,7 +150,6 @@
       </p>
       <div style="margin-top:16px"><a class="btn" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%20want%20to%20start%20my%20fitness%20journey!" target="_blank" rel="noopener">🚀 Start My Fitness Journey Today</a></div>
     </section>
-
     <section id="reviews" style="margin-top:48px">
       <h2>What Clients Are Saying</h2>
       <div class="packages" style="margin-top:18px">
@@ -165,13 +158,11 @@
         <div class="card"><div class="small">“Thank you Jessi, Training with you is fun and I see a difference in me. You are very professional and I can trust you. I am lucky to know you.” — Wafaa, Cairo</div></div>
       </div>
     </section>
-
     <section id="retreats" style="margin-top:32px">
       <h2>Fitness Retreat Breaks</h2>
       <p class="small" style="max-width:700px">I also organise special fitness retreat breaks focused on wellness, training, recovery and transformation. If you are interested in joining a future retreat, please let me know.</p>
       <div style="margin-top:12px"><a class="btn" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%20am%20interested%20in%20your%20Fitness%20Retreat%20Breaks.%20Please%20send%20me%20more%20information." target="_blank" rel="noopener">🌴 Secure My Spot For The Next Fitness Retreat</a></div>
     </section>
-
     <section id="merch" style="margin-top:32px">
       <h2>FWJ Merch & Digital Downloads</h2>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
@@ -180,12 +171,137 @@
       </div>
       <div class="small" style="margin-top:10px">Merch is sold via external platforms.</div>
     </section>
-
     <footer>
       <div>© 2025 Fitness with Jessi — All Rights Reserved.</div>
       <div>Powered by Ysi Creations</div>
     </footer>
-
   </div>
+
+<!-- Jessi Fitness Guide Bot - Flush & Responsive -->
+<div id="jessi-bot" style="position:fixed;bottom:20px;right:16px;z-index:9999">
+  <button id="jessi-bot-toggle"
+    aria-label="Open Jessi Fitness Guide"
+    style="background:#B9FF39;color:#0C0F1A;border:none;border-radius:50%;width:60px;height:60px;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.15)">
+    💬
+  </button>
+  <div id="jessi-bot-window"
+    style="display:none;position:fixed;bottom:90px;right:16px;width:360px;max-width:90vw;height:420px;max-height:75vh;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.1);overflow:hidden;flex-direction:column;font-family:Inter,sans-serif;display:flex;">
+   
+    <!-- Header -->
+    <div style="background:#B9FF39;padding:10px;text-align:center;font-weight:700;color:#0C0F1A;position:relative">
+      Jessi Fitness Guide
+      <button id="jessi-bot-close" 
+        style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:20px;cursor:pointer;color:#0C0F1A">
+        ✕
+      </button>
+    </div>
+   
+    <!-- Chat Content -->
+    <div id="jessi-bot-content" style="flex:1;padding:12px;overflow-y:auto;font-size:14px;scroll-behavior:smooth;">
+      <div>Hello! 👋 I'm Jessi, your Fitness Guide. I can calculate your BMI, calories, weight goals, and provide healthy meal ideas. Type your height & weight in cm & kg (e.g., <strong>170, 65</strong>) or ask for <strong>meal suggestions</strong>.</div>
+    </div>
+   
+    <!-- Input -->
+    <div style="padding:8px;border-top:1px solid #eee;display:flex;gap:6px;">
+      <input type="text" id="jessi-bot-input" placeholder="Type here..."
+        style="flex:1;padding:10px;border:1px solid #ccc;border-radius:6px;min-width:0"/>
+      <button id="jessi-bot-send"
+        style="padding:6px 10px;background:#B9FF39;border:none;border-radius:6px;font-weight:700;cursor:pointer;color:#0C0F1A">
+        Send
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  const botToggle = document.getElementById('jessi-bot-toggle');
+  const botWindow = document.getElementById('jessi-bot-window');
+  const botContent = document.getElementById('jessi-bot-content');
+  const botInput = document.getElementById('jessi-bot-input');
+  const botSend = document.getElementById('jessi-bot-send');
+  const botClose = document.getElementById('jessi-bot-close');
+
+  function openBot() {
+    botWindow.style.display = 'flex';
+    botInput.focus();
+  }
+
+  function closeBot() {
+    botWindow.style.display = 'none';
+  }
+
+  botToggle.addEventListener('click', openBot);
+  botClose.addEventListener('click', closeBot);
+
+  function appendBotMessage(msg){
+    const messageDiv = document.createElement('div');
+    messageDiv.style.marginBottom = '6px';
+    messageDiv.innerHTML = msg;
+    botContent.appendChild(messageDiv);
+    botContent.scrollTop = botContent.scrollHeight;
+  }
+
+  function handleBotQuery(query){
+    query = query.toLowerCase();
+    if(query.includes('bmi') || query.includes('weight')){
+      appendBotMessage("Let's calculate your BMI! Type: height in cm, weight in kg (e.g., 170, 65)");
+    }
+    else if(query.match(/\d{2,3},\s*\d{2,3}/)){
+      const [heightCm, weightKg] = query.split(',').map(x => parseFloat(x.trim()));
+      const heightM = heightCm / 100;
+      const bmi = (weightKg / (heightM * heightM)).toFixed(1);
+      appendBotMessage(`Your BMI is ${bmi}. ${bmi<18.5?'Underweight':bmi<25?'Normal weight':bmi<30?'Overweight':'Obese'}`);
+      const calories = (25 * weightKg).toFixed(0);
+      appendBotMessage(`Estimated daily calories for maintenance: ${calories} kcal.`);
+      appendBotMessage("For weight loss: -500 kcal/day | For weight gain: +500 kcal/day.");
+    }
+    else if(query.includes('meal') || query.includes('food') || query.includes('recipe')){
+      appendBotMessage(`Healthy suggestions:
+✅ Breakfast: Greek yogurt with berries, avocado toast, oatmeal.
+✅ Lunch: Grilled chicken salad, quinoa bowl, salmon wrap.
+✅ Dinner: Baked salmon with veggies, lentil curry, turkey stir-fry.
+✅ Snacks: Nuts, fruit, hummus with veggies.
+✅ Smoothies: Spinach & banana, berry protein, tropical mango.
+✅ Drinks: Water, herbal teas, infused water.
+Balance protein, carbs, and healthy fats in each meal.`);
+    }
+    else if(query.includes('hi') || query.includes('hello')){
+      appendBotMessage("Hi! I'm Jessi, your friendly Fitness Guide. Ask me to calculate your BMI, calories, or meal ideas!");
+    }
+    else{
+      appendBotMessage("I can help with BMI, calories, weight goals, and healthy meals! Try '170, 65' or 'meal suggestions'.");
+    }
+  }
+
+  botSend.addEventListener('click', () => {
+    const query = botInput.value.trim();
+    if(!query) return;
+    appendBotMessage(`<strong>You:</strong> ${query}`);
+    handleBotQuery(query);
+    botInput.value = '';
+  });
+
+  botInput.addEventListener('keypress', e => {
+    if(e.key === 'Enter') botSend.click();
+  });
+
+  function adjustBotSize(){
+    if(window.innerWidth < 500){
+      botWindow.style.width = '95vw';
+      botWindow.style.height = '65vh';
+      botWindow.style.right = '2.5vw';
+      botWindow.style.bottom = '100px';
+      botWindow.style.borderRadius = '10px';
+    } else {
+      botWindow.style.width = '360px';
+      botWindow.style.height = '420px';
+      botWindow.style.right = '16px';
+      botWindow.style.bottom = '90px';
+      botWindow.style.borderRadius = '14px';
+    }
+  }
+
+  window.addEventListener('resize', adjustBotSize);
+  adjustBotSize();
+</script>
 </body>
 </html>
