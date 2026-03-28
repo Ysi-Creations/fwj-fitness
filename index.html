@@ -45,8 +45,8 @@
     .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:36px 0}
     .hero-card{background:linear-gradient(180deg,rgba(255,255,255,0.75),rgba(255,255,255,0.9));padding:22px;border-radius:var(--radius);box-shadow:0 10px 30px rgba(2,6,23,0.06)}
     .cta{display:flex;gap:12px;margin-top:18px}
-    .btn{background:var(--accent);border:none;color:var(--navy);padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none}
-    .btn.ghost{background:transparent;border:2px solid rgba(12,15,26,0.08);color:var(--navy);font-weight:600}
+    .btn{background:var(--accent);border:none;color:var(--navy);padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+    .btn.ghost{background:var(--accent);border:none;color:var(--navy);font-weight:700;display:inline-block}
     .offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
     .card{background:var(--card-bg);padding:18px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.06)}
     .price{font-size:22px;font-weight:800;margin-top:8px}
@@ -84,9 +84,30 @@
         </div>
         <div style="margin-top:20px;color:var(--muted);font-size:14px">After you message via WhatsApp we'll send step-by-step payment instructions to your phone.</div>
         <div class="offer-grid" id="offers">
-          <div class="card"><strong>15-Minute Express</strong><div class="small">High-impact micro workouts.</div><div class="price">$10</div></div>
-          <div class="card"><strong>1-Hour Full Class</strong><div class="small">Full sessions — group or private.</div><div class="price">$20</div></div>
-          <div class="card"><strong>Aqua Fitness</strong><div class="small">Low-impact aquatic classes.</div><div class="price">$20</div></div>
+          <div class="card">
+            <strong>15-Minute Express</strong>
+            <div class="small">High-impact micro workouts.</div>
+            <div class="price">$10</div>
+            <div style="margin-top:12px">
+              <a class="btn" style="width:100%;text-align:center" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%20want%20to%20book%20the%2015-Minute%20Express%20workout.%0A%0AName%3A%0AGoal%3A%0APreferred%20day%3A%0APreferred%20time%3A" target="_blank" rel="noopener">🔥 Book 15-Min Express Now</a>
+            </div>
+          </div>
+          <div class="card">
+            <strong>1-Hour Full Class</strong>
+            <div class="small">Full sessions — group or private.</div>
+            <div class="price">$20</div>
+            <div style="margin-top:12px">
+              <a class="btn" style="width:100%;text-align:center" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%20want%20to%20book%20the%201-Hour%20Full%20Class.%0A%0AName%3A%0AGoal%3A%0APreferred%20day%3A%0APreferred%20time%3A" target="_blank" rel="noopener">💪 Book 1-Hour Full Class</a>
+            </div>
+          </div>
+          <div class="card">
+            <strong>Aqua Fitness</strong>
+            <div class="small">Low-impact aquatic classes.</div>
+            <div class="price">$20</div>
+            <div style="margin-top:12px">
+              <a class="btn" style="width:100%;text-align:center" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%20want%20to%20book%20Aqua%20Fitness.%0A%0AName%3A%0AGoal%3A%0APreferred%20day%3A%0APreferred%20time%3A" target="_blank" rel="noopener">🌊 Book Aqua Fitness Session</a>
+            </div>
+          </div>
         </div>
       </div>
 
