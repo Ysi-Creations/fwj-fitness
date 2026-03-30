@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Fitness with Jessi FWJ — Fitness That Fits Your Life</title>
   <meta name="description" content="Quick, effective fitness: 1-hour classes, 15-minute express workouts, aqua fitness, rehab, stretching and nutrition coaching. Book via WhatsApp — payment instructions sent to your phone." />
-  <meta name="keywords" content="15 minute workout, quick workout, personal trainer, fitness classes, aqua fitness, nutrition coaching, home workout, stretching exercises, rehab exercises, fitness coach, online fitness classes, fitness packages, 1 hour workout, personal trainer near me, fitness coach near me, quick workouts for busy people, 15 min workout, express workout, aqua fitness classes, low impact workout, injury rehab exercises, mobility training, stretching routine, nutrition plan for weight loss, beginner workout plan, transformation coach, fitness packages near me, group fitness classes, private training sessions, online personal trainer, virtual fitness classes, weight loss workout plan, strength and conditioning coach, postnatal fitness, senior fitness classes, corporate wellness classes, HIIT workout 15 minutes, fat burning workout, core and stretch class, recovery workout, flexibility training, accountability coach, fitness transformation program, London fitness coach, UK personal trainer" /> 
+  <meta name="keywords" content="15 minute workout, quick workout, personal trainer, fitness classes, aqua fitness, nutrition coaching, home workout, stretching exercises, rehab exercises, fitness coach, online fitness classes, fitness packages, 1 hour workout, personal trainer near me, fitness coach near me, quick workouts for busy people, 15 min workout, express workout, aqua fitness classes, low impact workout, injury rehab exercises, mobility training, stretching routine, nutrition plan for weight loss, beginner workout plan, transformation coach, fitness packages near me, group fitness classes, private training sessions, online personal trainer, virtual fitness classes, weight loss workout plan, strength and conditioning coach, postnatal fitness, senior fitness classes, corporate wellness classes, HIIT workout 15 minutes, fat burning workout, core and stretch class, recovery workout, flexibility training, accountability coach, fitness transformation program, London fitness coach, UK personal trainer" />
   <meta property="og:title" content="Fitness with Jessi — Transform Your Body" />
   <meta property="og:description" content="Express workouts, online classes, aqua fitness and personalised coaching. Start your transformation today." />
   <meta property="og:type" content="website" />
@@ -178,7 +177,7 @@
     </footer>
   </div>
 
-<!-- Jessi Fitness Guide Bot - Flush & Responsive -->
+<!-- Jessi Fitness Guide Bot - Fixed to open only on user click -->
 <div id="jessi-bot" style="position:fixed;bottom:20px;right:16px;z-index:9999">
   <button id="jessi-bot-toggle"
     aria-label="Open Jessi Fitness Guide"
@@ -187,21 +186,21 @@
   </button>
   <div id="jessi-bot-window"
     style="display:none;position:fixed;bottom:90px;right:16px;width:360px;max-width:90vw;height:420px;max-height:75vh;background:#fff;border-radius:14px;box-shadow:0 10px 30px rgba(2,6,23,0.1);overflow:hidden;flex-direction:column;font-family:Inter,sans-serif;display:flex;">
-   
+  
     <!-- Header -->
     <div style="background:#B9FF39;padding:10px;text-align:center;font-weight:700;color:#0C0F1A;position:relative">
       Jessi Fitness Guide
-      <button id="jessi-bot-close" 
+      <button id="jessi-bot-close"
         style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;font-size:20px;cursor:pointer;color:#0C0F1A">
         ✕
       </button>
     </div>
-   
+  
     <!-- Chat Content -->
     <div id="jessi-bot-content" style="flex:1;padding:12px;overflow-y:auto;font-size:14px;scroll-behavior:smooth;">
-      <div>Hello! 👋 I'm Jessi, your Fitness Guide. I can calculate your BMI, calories, weight goals, and provide healthy meal ideas. Type your height & weight in cm & kg (e.g., <strong>170, 65</strong>) or ask for <strong>meal suggestions</strong>.</div> 
+      <div>Hello! 👋 I'm Jessi, your Fitness Guide. I can calculate your BMI, calories, weight goals, and provide healthy meal ideas. Type your height & weight in cm & kg (e.g., <strong>170, 65</strong>) or ask for <strong>meal suggestions</strong>.</div>
     </div>
-   
+  
     <!-- Input -->
     <div style="padding:8px;border-top:1px solid #eee;display:flex;gap:6px;">
       <input type="text" id="jessi-bot-input" placeholder="Type here..."
@@ -213,6 +212,7 @@
     </div>
   </div>
 </div>
+
 <script>
   const botToggle = document.getElementById('jessi-bot-toggle');
   const botWindow = document.getElementById('jessi-bot-window');
@@ -233,6 +233,13 @@
   botToggle.addEventListener('click', openBot);
   botClose.addEventListener('click', closeBot);
 
+  // Close bot when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!botToggle.contains(e.target) && !botWindow.contains(e.target)) {
+      closeBot();
+    }
+  });
+
   function appendBotMessage(msg){
     const messageDiv = document.createElement('div');
     messageDiv.style.marginBottom = '6px';
@@ -243,45 +250,31 @@
 
   function handleBotQuery(query){
     query = query.toLowerCase().trim();
-
-    // Simple & Accurate BMI + Calories Calculation
     if(query.includes('bmi') || query.includes('weight') || query.includes('calculate')){
       appendBotMessage("Please type your height and weight like this:<br><strong>170, 65</strong> (height in cm, weight in kg)");
       return;
     }
-
-    // Check for number pattern like "170, 65" or "170 65"
     const numbers = query.match(/\d{2,3}/g);
     if(numbers && numbers.length >= 2){
       let heightCm = parseFloat(numbers[0]);
       let weightKg = parseFloat(numbers[1]);
-
-      // Basic validation
       if(heightCm < 100 || heightCm > 250 || weightKg < 30 || weightKg > 300){
         appendBotMessage("Please enter realistic values (height 100-250 cm, weight 30-300 kg)");
         return;
       }
-
       const heightM = heightCm / 100;
       const bmi = (weightKg / (heightM * heightM)).toFixed(1);
-
       let category = '';
       if(bmi < 18.5) category = 'Underweight';
       else if(bmi < 25) category = 'Normal weight';
       else if(bmi < 30) category = 'Overweight';
       else category = 'Obese';
-
       appendBotMessage(`Your BMI is <strong>${bmi}</strong> — ${category}`);
-
-      // Simple accurate maintenance calories (Mifflin-St Jeor simplified for general use)
-      const maintenanceCalories = Math.round(weightKg * 24);   // More realistic base
+      const maintenanceCalories = Math.round(weightKg * 24);
       appendBotMessage(`Estimated daily calories for maintenance: <strong>${maintenanceCalories} kcal</strong>`);
-
       appendBotMessage("For weight loss: subtract 300–500 kcal/day<br>For weight gain: add 300–500 kcal/day");
       return;
     }
-
-    // Meal suggestions
     else if(query.includes('meal') || query.includes('food') || query.includes('recipe') || query.includes('eat')){
       appendBotMessage(`Healthy meal suggestions:
 ✅ Breakfast: Greek yogurt with berries, avocado toast, oatmeal with nuts, scrambled eggs with spinach, protein pancakes, chia pudding, smoothie bowl.
@@ -327,11 +320,11 @@ Balance protein, carbs, and healthy fats in each meal.`);
       botWindow.style.borderRadius = '14px';
     }
   }
-
   window.addEventListener('resize', adjustBotSize);
   adjustBotSize();
+
+  // Ensure bot starts closed on page load
+  botWindow.style.display = 'none';
 </script>
 </body>
 </html>
-
-
