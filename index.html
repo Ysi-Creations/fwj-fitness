@@ -77,7 +77,7 @@
         <p class="lead">Quick, effective workouts built for busy people. Online classes, rehab, aqua fitness, stretching & personalised nutrition coaching.<br><strong>Transform your body in as little as 12 sessions.</strong></p>
         <div class="cta">
           <a class="btn" href="https://wa.me/447881077860?text=Hi%20Jessi%2C%20I%27d%20like%20to%20book%20a%20fitness%20session.%0A%0AName%3A%0AGoal%20(weight%20loss%20%2F%20strength%20%2F%20rehab)%3A%0APreferred%20session%20type%3A%0A%E2%80%A2%2015%20minute%20express%0A%E2%80%A2%201%20hour%20class%0A%E2%80%A2%20Aqua%20fitness%0A%0APreferred%20day%3A%0APreferred%20time%3A" target="_blank" rel="noopener">🔥 Start Your Fitness Journey — Book on WhatsApp</a>
-          <a class="btn ghost" href="#packages">💪 View Packages & Get Started</a>
+          <button class="btn" id="openGuidelinesBtn" style="margin-left:12px">📋 View Training Guidelines</button>
         </div>
         <div style="margin-top:20px;color:var(--muted);font-size:14px">After you message via WhatsApp we'll send step-by-step payment instructions to your phone.</div>
         <div class="offer-grid" id="offers">
@@ -213,6 +213,116 @@
   </div>
 </div>
 
+<!-- Training Guidelines Modal (Place at end of <body>) -->
+<div id="trainingModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeGuidelinesBtn">&times;</span>
+    <!-- Welcome Section -->
+    <h2 class="modal-welcome">Welcome to My Page</h2>
+    <p class="modal-intro">Your fitness journey starts here!</p>
+    <!-- Guidelines Section -->
+    <h3 class="modal-title">Training Guidelines & Rules</h3>
+    <ul class="modal-list">
+      <li>24-hour notice is required for cancellations or rescheduling</li>
+      <li>Please arrive on time for your session</li>
+      <li>Wear appropriate training clothing and footwear</li>
+      <li>Bring water and a towel to every session</li>
+      <li>Inform me of any injuries or health conditions before training</li>
+      <li>Respect and commitment are expected throughout your fitness journey</li>
+      <li>No refunds — by booking you agree to this policy</li>
+    </ul>
+    <!-- Agree Button -->
+    <div class="modal-footer">
+      <a href="https://wa.me/447881077860?text=I%20agree%20to%20the%20Training%20Guidelines" target="_blank" class="btn">✅ Agree & Continue via WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- Styles -->
+<style>
+  /* Button Style */
+  .btn {
+    background-color: #B9FF39;
+    color: #0C0F1A;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  }
+  .btn:hover { background-color: #a6e835; }
+  /* Modal Background */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 9999;
+    overflow-y: auto;
+    padding: 40px 20px;
+  }
+  /* Modal Content Box */
+  .modal-content {
+    background: #fff;
+    margin: auto;
+    padding: 32px 36px;
+    border-radius: 16px;
+    max-width: 520px;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+    animation: slideDown 0.3s ease-out;
+  }
+  @keyframes slideDown {
+    from { transform: translateY(-30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  /* Close Button */
+  .close-btn {
+    position: absolute;
+    top: 14px; right: 18px;
+    font-size: 24px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #333;
+  }
+  /* Modal Text Styling */
+  .modal-welcome {
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    color: #0C0F1A;
+  }
+  .modal-intro {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #444;
+  }
+  .modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+    color: #0C0F1A;
+  }
+  .modal-list {
+    line-height: 1.8;
+    font-size: 15px;
+    padding-left: 20px;
+    color: #222;
+  }
+  /* Footer */
+  .modal-footer {
+    margin-top: 24px;
+    text-align: center;
+  }
+</style>
+
 <script>
   const botToggle = document.getElementById('jessi-bot-toggle');
   const botWindow = document.getElementById('jessi-bot-window');
@@ -233,7 +343,6 @@
   botToggle.addEventListener('click', openBot);
   botClose.addEventListener('click', closeBot);
 
-  // Close bot when clicking outside
   document.addEventListener('click', function(e) {
     if (!botToggle.contains(e.target) && !botWindow.contains(e.target)) {
       closeBot();
@@ -323,8 +432,16 @@ Balance protein, carbs, and healthy fats in each meal.`);
   window.addEventListener('resize', adjustBotSize);
   adjustBotSize();
 
-  // Ensure bot starts closed on page load
   botWindow.style.display = 'none';
+
+  const modal = document.getElementById('trainingModal');
+  const openBtn = document.getElementById('openGuidelinesBtn');
+  const closeBtn = document.getElementById('closeGuidelinesBtn');
+  openBtn.onclick = () => modal.style.display = 'block';
+  closeBtn.onclick = () => modal.style.display = 'none';
+  window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = 'none';
+  };
 </script>
 </body>
 </html>
